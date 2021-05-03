@@ -6,8 +6,21 @@ using System.Linq;
 
 namespace GetAwsMetric
 {
-    public class MetricRequest
+    public class AwsMetricRequest
     {
+        public enum Statistic
+        {
+            Minimium,
+            Maximum,
+            Average
+        }
+
+        public enum MetricName
+        {
+            CpuUtilised,
+            MemoryUtilised
+        }
+
         private DateTime utcFrom;
         private DateTime utcTo;
         private readonly IDictionary<string, string> dimensions = new Dictionary<string, string>();
@@ -16,7 +29,7 @@ namespace GetAwsMetric
         private readonly HashSet<Statistic> stats = new HashSet<Statistic>();
         private StandardUnit unit = StandardUnit.Percent;
 
-        public MetricRequest(string ns, string name)
+        public AwsMetricRequest(string ns, string name)
         {
             metricName = name;
             this.ns = ns;
@@ -24,41 +37,41 @@ namespace GetAwsMetric
 
         public TimeSpan Period { get; set; } = TimeSpan.FromSeconds(60);
 
-        public MetricRequest FromUtc(DateTime ts)
+        public AwsMetricRequest FromUtc(DateTime ts)
         {
             utcFrom = ts;
             return this;
         }
 
-        public MetricRequest ToUtc(DateTime ts)
+        public AwsMetricRequest ToUtc(DateTime ts)
         {
             utcTo = ts;
             return this;
         }
 
-        public MetricRequest WithPeriod(TimeSpan ts)
+        public AwsMetricRequest WithPeriod(TimeSpan ts)
         {
             return this;
         }
 
-        public MetricRequest Unit(StandardUnit unit)
+        public AwsMetricRequest Unit(StandardUnit unit)
         {
             this.unit = unit;
             return this;
         }
 
-        public MetricRequest AddStatistics(Statistic stat)
+        public AwsMetricRequest AddStatistics(Statistic stat)
         {
             stats.Add(stat);
             return this;
         }
-        public MetricRequest AddDimension(string name, string value)
+        public AwsMetricRequest AddDimension(string name, string value)
         {
             dimensions[name] = value;
             return this;
         }
 
-        public MetricRequest LastMinutes(int minutes)
+        public AwsMetricRequest LastMinutes(int minutes)
         {
             var now = DateTime.UtcNow;
             utcFrom = now.AddMinutes(-minutes);
@@ -67,7 +80,7 @@ namespace GetAwsMetric
             return this;
         }
 
-        public MetricRequest ForEC2Instance(string name)
+        public AwsMetricRequest ForEC2Instance(string name)
         {
             dimensions["InstanceId"] = name;
             return this;

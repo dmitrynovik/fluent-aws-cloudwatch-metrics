@@ -7,8 +7,8 @@ namespace GetAwsMetric
     {
         static void Main()
         {
-            var request = new MetricRequest("AWS/EC2", "CPUUtilization")
-                .AddStatistics(Statistic.Average)
+            var request = new AwsMetricRequest("AWS/EC2", "CPUUtilization")
+                .AddStatistics(AwsMetricRequest.Statistic.Average)
                 .AddDimension("InstanceId", "i-0af87ffc0d4062cfc")
                 .LastMinutes(5);
 
