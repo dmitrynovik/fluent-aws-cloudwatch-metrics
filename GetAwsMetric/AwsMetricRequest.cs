@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace GetAwsMetric
 {
+
     public class AwsMetricRequest
     {
         public enum Statistic

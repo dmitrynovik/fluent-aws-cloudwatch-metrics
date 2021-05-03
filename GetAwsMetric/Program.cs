@@ -7,9 +7,8 @@ namespace GetAwsMetric
     {
         static void Main()
         {
-            var request = new AwsMetricRequest("AWS/EC2", "CPUUtilization")
+            var request = new EC2CpuUtlizationRequest("i-0af87ffc0d4062cfc")
                 .AddStatistics(AwsMetricRequest.Statistic.Average)
-                .AddDimension("InstanceId", "i-0af87ffc0d4062cfc")
                 .LastMinutes(5);
 
             var client = new AwsMetricClient();

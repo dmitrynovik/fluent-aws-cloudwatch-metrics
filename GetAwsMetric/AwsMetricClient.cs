@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace GetAwsMetric
 {
-
     public class AwsMetricClient
     {
         // aws cloudwatch get-metric-statistics --namespace AWS/EC2 --metric-name CPUUtilization  --period 60 --statistics Maximum
