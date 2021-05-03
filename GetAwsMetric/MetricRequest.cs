@@ -58,10 +58,10 @@ namespace GetAwsMetric
             return this;
         }
 
-        public MetricRequest Last5Minutes()
+        public MetricRequest LastMinutes(int minutes)
         {
             var now = DateTime.UtcNow;
-            utcFrom = now.AddMinutes(-5);
+            utcFrom = now.AddMinutes(-minutes);
             utcTo = now;
             Period = TimeSpan.FromSeconds(60);
             return this;
