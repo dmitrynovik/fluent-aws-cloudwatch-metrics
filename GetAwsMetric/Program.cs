@@ -14,9 +14,9 @@ namespace GetAwsMetric
 
             var client = new AwsMetricClient();
             Console.WriteLine(request);
+            Console.WriteLine();
 
             var result = client.GetMetric(request).GetAwaiter().GetResult();
-
             result.Datapoints.ToList().ForEach(x =>
             {
                 Console.WriteLine($"{x.Timestamp}: {x.Average}");
