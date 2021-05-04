@@ -19,7 +19,7 @@ namespace GetAwsMetric.RDS
             awsMetricClient = new AwsMetricClient(key, secret);
         }
 
-        public async Task<Load> GetCurrent(string dbInstance)
+        public async Task<Load> GetCurrent(string dbInstance, int dataPointEachSeconds = 60, int periodSeconds = 120)
         {
             if (string.IsNullOrWhiteSpace(dbInstance))
                 throw new ArgumentException($"'{nameof(dbInstance)}' cannot be null or whitespace.", nameof(dbInstance));
@@ -28,8 +28,8 @@ namespace GetAwsMetric.RDS
                 .AddStatistics(AwsMetricRequest.Statistic.Average)
                 .AddStatistics(AwsMetricRequest.Statistic.Minimum)
                 .AddStatistics(AwsMetricRequest.Statistic.Maximum)
-                .DataPointEach(TimeSpan.FromSeconds(60))
-                .Recent(TimeSpan.FromMinutes(2));
+                .DataPointEach(TimeSpan.FromSeconds(dataPointEachSeconds))
+                .Recent(TimeSpan.FromSeconds(periodSeconds));
 
             var requests = new[]
             {
