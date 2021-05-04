@@ -13,7 +13,7 @@ namespace GetAwsMetric
                 Environment.GetEnvironmentVariable("RDS_DB_INSTANCE") ?? 
                 throw new ArgumentException("no database instance passed!");
 
-            var request = new CpuUtlizationRequest(dbInstance)
+            var request = new RdsMetricsRequest("CPUUtilization", dbInstance)
                 .AddStatistics(AwsMetricRequest.Statistic.Average)
                 .AddStatistics(AwsMetricRequest.Statistic.Minimum)
                 .AddStatistics(AwsMetricRequest.Statistic.Maximum)
