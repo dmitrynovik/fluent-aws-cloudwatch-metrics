@@ -2,6 +2,7 @@
 Getting a bunch of metrics from AWS made easier!
 
 ## Single metric - an example
+Get single CloudWatch metric for last 2 minutes with data point each minute:
 ```
 var request = new RdsMetricsRequest("CPUUtilization", dbInstance)
     .AddStatistics(AwsMetricRequest.Statistic.Average)
