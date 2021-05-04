@@ -11,7 +11,7 @@ namespace GetAwsMetric
     {
         public enum Statistic
         {
-            Minimium,
+            Minimum,
             Maximum,
             Average
         }
@@ -24,16 +24,29 @@ namespace GetAwsMetric
 
         private DateTime utcFrom;
         private DateTime utcTo;
-        private readonly IDictionary<string, string> dimensions = new Dictionary<string, string>();
+        private IDictionary<string, string> dimensions = new Dictionary<string, string>();
         private readonly string metricName;
         private readonly string ns;
-        private readonly HashSet<Statistic> stats = new HashSet<Statistic>();
+        private HashSet<Statistic> stats = new HashSet<Statistic>();
         private StandardUnit unit = StandardUnit.Percent;
 
         public AwsMetricRequest(string ns, string name)
         {
             metricName = name;
             this.ns = ns;
+        }
+
+        public AwsMetricRequest Copy(string name, StandardUnit u = null, Statistic? stat = null)
+        {
+            var copy = new AwsMetricRequest(ns, name)
+            {
+                unit = u == null ? unit : u,
+                utcFrom = utcFrom,
+                utcTo = utcTo,
+                stats = new HashSet<Statistic>(stats),
+                dimensions = new Dictionary<string, string>(this.dimensions)
+            };
+            return stat.HasValue ? copy.SetStatistics(stat.Value) : copy;
         }
 
         public TimeSpan Period { get; set; } = TimeSpan.FromSeconds(60);
@@ -67,6 +80,13 @@ namespace GetAwsMetric
             stats.Add(stat);
             return this;
         }
+
+        public AwsMetricRequest SetStatistics(Statistic stat)
+        {
+            stats.Clear();
+            return AddStatistics(stat);
+        }
+
         public AwsMetricRequest AddDimension(string name, string value)
         {
             dimensions[name] = value;
