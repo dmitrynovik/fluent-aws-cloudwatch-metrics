@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GetAwsMetric.RDS;
+using System;
 using System.Linq;
 
 namespace GetAwsMetric
@@ -7,9 +8,10 @@ namespace GetAwsMetric
     {
         static void Main()
         {
-            var request = new EC2CpuUtlizationRequest("i-0af87ffc0d4062cfc")
+            var request = new CpuUtlizationRequest("solrad-develop")
                 .AddStatistics(AwsMetricRequest.Statistic.Average)
-                .LastMinutes(5);
+                .WithPeriod(TimeSpan.FromSeconds(60))
+                .Last(TimeSpan.FromMinutes(2));
 
             var client = new AwsMetricClient();
             Console.WriteLine(request);

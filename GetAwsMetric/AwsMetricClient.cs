@@ -12,9 +12,8 @@ namespace GetAwsMetric
             if (!request.IsValid())
                 throw new ArgumentException(nameof(request));
 
-            var rq = request.ToGetMetricStatisticsRequest();
             using var awsClient = new AmazonCloudWatchClient();
-            return await awsClient.GetMetricStatisticsAsync(rq);
+            return await awsClient.GetMetricStatisticsAsync(request.ToGetMetricStatisticsRequest());
         }
     }
 }

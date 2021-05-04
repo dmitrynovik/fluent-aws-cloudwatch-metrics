@@ -52,6 +52,7 @@ namespace GetAwsMetric
 
         public AwsMetricRequest WithPeriod(TimeSpan ts)
         {
+            Period = ts;
             return this;
         }
 
@@ -72,12 +73,11 @@ namespace GetAwsMetric
             return this;
         }
 
-        public AwsMetricRequest LastMinutes(int minutes)
+        public AwsMetricRequest Last(TimeSpan period)
         {
             var now = DateTime.UtcNow;
-            utcFrom = now.AddMinutes(-minutes);
+            utcFrom = now.Add(-period);
             utcTo = now;
-            Period = TimeSpan.FromSeconds(60);
             return this;
         }
 
