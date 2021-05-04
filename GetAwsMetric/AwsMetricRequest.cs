@@ -105,12 +105,6 @@ namespace GetAwsMetric
             return this;
         }
 
-        public AwsMetricRequest ForEC2Instance(string name)
-        {
-            dimensions["InstanceId"] = name;
-            return this;
-        }
-
         public GetMetricStatisticsRequest ToGetMetricStatisticsRequest()
         {
             return new GetMetricStatisticsRequest
