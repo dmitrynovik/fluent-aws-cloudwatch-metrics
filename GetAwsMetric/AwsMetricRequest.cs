@@ -36,18 +36,22 @@ namespace GetAwsMetric
             this.ns = ns;
         }
 
-        public AwsMetricRequest Copy(string name, StandardUnit u = null, Statistic? stat = null)
+        public AwsMetricRequest(string name, AwsMetricRequest other, StandardUnit u = null, Statistic? stat = null)
         {
-            var copy = new AwsMetricRequest(ns, name)
+            ns = other.ns;
+            metricName = name;
+            unit = u == null ? other.unit : u;
+            utcFrom = other.utcFrom;
+            utcTo = other.utcTo;
+            stats = new HashSet<Statistic>(other.stats);
+            dimensions = new Dictionary<string, string>(other.dimensions);
+            if (stat.HasValue)
             {
-                unit = u == null ? unit : u,
-                utcFrom = utcFrom,
-                utcTo = utcTo,
-                stats = new HashSet<Statistic>(stats),
-                dimensions = new Dictionary<string, string>(this.dimensions)
-            };
-            return stat.HasValue ? copy.SetStatistics(stat.Value) : copy;
+                SetStatistics(stat.Value);
+            }
         }
+
+        public AwsMetricRequest Copy(string name, StandardUnit u = null, Statistic? stat = null) => new AwsMetricRequest(name, this, u, stat);
 
         public TimeSpan Period { get; set; } = TimeSpan.FromSeconds(60);
 

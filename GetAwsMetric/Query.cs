@@ -7,7 +7,7 @@ namespace GetAwsMetric
 {
     public static class Query
     {
-        public static async Task<GetMetricStatisticsResponse> Execute(AwsMetricRequest request) => await new AwsMetricClient().GetMetric(request);
+        public static async Task<GetMetricStatisticsResponse> ExecuteSingle(AwsMetricRequest request) => await new AwsMetricClient().GetMetric(request);
 
         public static async Task<GetMetricStatisticsResponse[]> ExecuteAll(IEnumerable<AwsMetricRequest> requests)
         {
