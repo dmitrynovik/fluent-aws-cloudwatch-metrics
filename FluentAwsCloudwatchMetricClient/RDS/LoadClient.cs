@@ -28,8 +28,8 @@ namespace GetAwsMetric.RDS
                 .AddStatistics(AwsMetricRequest.Statistic.Average)
                 .AddStatistics(AwsMetricRequest.Statistic.Minimum)
                 .AddStatistics(AwsMetricRequest.Statistic.Maximum)
-                .WithPeriod(TimeSpan.FromSeconds(60))
-                .Last(TimeSpan.FromMinutes(2));
+                .DataPointEach(TimeSpan.FromSeconds(60))
+                .Recent(TimeSpan.FromMinutes(2));
 
             var requests = new[]
             {

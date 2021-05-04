@@ -67,7 +67,7 @@ namespace GetAwsMetric
             return this;
         }
 
-        public AwsMetricRequest WithPeriod(TimeSpan ts)
+        public AwsMetricRequest DataPointEach(TimeSpan ts)
         {
             Period = ts;
             return this;
@@ -97,7 +97,7 @@ namespace GetAwsMetric
             return this;
         }
 
-        public AwsMetricRequest Last(TimeSpan period)
+        public AwsMetricRequest Recent(TimeSpan period)
         {
             var now = DateTime.UtcNow;
             utcFrom = now.Add(-period);
