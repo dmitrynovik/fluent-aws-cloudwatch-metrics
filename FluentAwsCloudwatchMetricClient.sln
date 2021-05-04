@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GetAwsMetric", "GetAwsMetric\GetAwsMetric.csproj", "{FD393B2B-50D6-433C-A84D-D8CEDEB59A11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentAwsCloudwatchMetricClient", "FluentAwsCloudwatchMetricClient\FluentAwsCloudwatchMetricClient.csproj", "{FD393B2B-50D6-433C-A84D-D8CEDEB59A11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetAwsMetricRunner", "GetAwsMetricRunner\GetAwsMetricRunner.csproj", "{10D39270-4F96-414C-9C37-B55E68522AE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAwsCloudwatchMetricClientRunner", "FluentAwsCloudwatchMetricClientRunner\FluentAwsCloudwatchMetricClientRunner.csproj", "{10D39270-4F96-414C-9C37-B55E68522AE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
