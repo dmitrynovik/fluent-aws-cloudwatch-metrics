@@ -15,7 +15,7 @@ var response = await awsMetricClient.Execute(request);
 
 ## Multiple metrics (or "load")
 ```
-            var load = await new LoadClient().GetCurrent(dbInstance);
+var load = await new LoadClient().GetCurrent(dbInstance);
 
 ```
 
