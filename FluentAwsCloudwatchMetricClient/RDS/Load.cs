@@ -2,14 +2,14 @@
 {
     public class Load
     {
-        public double? CPUUtilization { get; set; }
-        public double? FreeableMemory { get; set; }
-        public double? DatabaseConnections { get; set; }
+        public double? CPUUtilization { get; internal set; }
+        public double? FreeableMemory { get; internal set; }
+        public double? DatabaseConnections { get; internal set; }
         public double? ReadLatency { get; internal set; }
-        public double? ReadIOPS { get; set; }
-        public double? ReadThroughput { get; set; }
-        public double? WriteIOPS { get; set; }
-        public double? WriteLatency { get; set; }
-        public double? WriteThroughput { get; set; }
+        public double? ReadIOPS { get; internal set; }
+        public double? ReadThroughput { get; internal set; }
+        public double? WriteIOPS { get; internal set; }
+        public double? WriteLatency { get; internal set; }
+        public double? WriteThroughput { get; internal set; }
     }
 }

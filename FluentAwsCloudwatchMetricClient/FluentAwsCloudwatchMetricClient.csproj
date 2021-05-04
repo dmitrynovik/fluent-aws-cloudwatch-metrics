@@ -3,6 +3,15 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>Dmitry Novik</Authors>
+    <Product>Fluent AWS Cloudwatch Metric Client</Product>
+    <PackageProjectUrl>https://github.com/dmitrynovik/fluent-aws-cloudwatch-metrics</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dmitrynovik/fluent-aws-cloudwatch-metrics</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>aws cloudfront metrics fluent</PackageTags>
+    <Description>Getting a bunch of metrics from AWS made easier</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

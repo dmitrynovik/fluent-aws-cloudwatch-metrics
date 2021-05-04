@@ -1,4 +1,5 @@
-﻿using Amazon.CloudWatch;
+﻿using Amazon;
+using Amazon.CloudWatch;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +15,9 @@ namespace GetAwsMetric.RDS
             awsMetricClient = new AwsMetricClient();
         }
 
-        public LoadClient(string key, string secret)
+        public LoadClient(string key, string secret, RegionEndpoint endpoint)
         {
-            awsMetricClient = new AwsMetricClient(key, secret);
+            awsMetricClient = new AwsMetricClient(key, secret, endpoint);
         }
 
         public async Task<Load> GetCurrent(string dbInstance, int dataPointEachSeconds = 60, int periodSeconds = 120)
@@ -48,15 +49,15 @@ namespace GetAwsMetric.RDS
 
             return new Load
             {
-                CPUUtilization = responses.GetOrDefault("CPUUtilization")?.Datapoints?.Last().Average,
-                DatabaseConnections = responses.GetOrDefault("DatabaseConnections")?.Datapoints?.Last().Maximum,
-                FreeableMemory = responses.GetOrDefault("FreeableMemory")?.Datapoints?.Last().Minimum,
-                ReadIOPS = responses.GetOrDefault("ReadIOPS")?.Datapoints?.Last().Average,
-                ReadLatency = responses.GetOrDefault("ReadLatency")?.Datapoints?.Last().Average,
-                ReadThroughput = responses.GetOrDefault("ReadThroughput")?.Datapoints?.Last().Average,
-                WriteIOPS = responses.GetOrDefault("WriteIOPS")?.Datapoints?.Last().Average,
-                WriteLatency = responses.GetOrDefault("WriteLatency")?.Datapoints?.Last().Average,
-                WriteThroughput = responses.GetOrDefault("WriteThroughput")?.Datapoints?.Last().Average,
+                CPUUtilization = responses.GetOrDefault("CPUUtilization")?.Datapoints?.LastOrDefault().Average,
+                DatabaseConnections = responses.GetOrDefault("DatabaseConnections")?.Datapoints?.LastOrDefault().Maximum,
+                FreeableMemory = responses.GetOrDefault("FreeableMemory")?.Datapoints?.LastOrDefault().Minimum,
+                ReadIOPS = responses.GetOrDefault("ReadIOPS")?.Datapoints?.LastOrDefault().Average,
+                ReadLatency = responses.GetOrDefault("ReadLatency")?.Datapoints?.LastOrDefault().Average,
+                ReadThroughput = responses.GetOrDefault("ReadThroughput")?.Datapoints?.LastOrDefault().Average,
+                WriteIOPS = responses.GetOrDefault("WriteIOPS")?.Datapoints?.LastOrDefault().Average,
+                WriteLatency = responses.GetOrDefault("WriteLatency")?.Datapoints?.LastOrDefault().Average,
+                WriteThroughput = responses.GetOrDefault("WriteThroughput")?.Datapoints?.LastOrDefault().Average,
             };
         }
     }
